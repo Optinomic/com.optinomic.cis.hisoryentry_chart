@@ -1,0 +1,63 @@
+<!--This example defines a Web Component that binds a property to series data and pushes new points-->
+<dom-module id="chart-behandlungsdichte">
+    <template>
+        <vaadin-line-chart id="chart">
+            <title>Behandlungsdichte</title>
+            <tooltip formatter="function() {return '' + 'Behandlung: ' + Highcharts.dateFormat('%Y-%m-%d %H:%M', this.x) + ': ' + this.y + 'Minuten';}"></tooltip>
+            <plot-options>
+                <spline>
+                    <marker enabled="true"></marker>
+                </spline>
+            </plot-options>
+            <x-axis type="datetime">
+                <date-time-label-formats month="%e. %b" year="%b">
+                </date-time-label-formats>
+                <title>Datum</title>
+            </x-axis>
+            <y-axis min="0">
+                <title>Dauer der Behandlungen (Minuten)</title>
+            </y-axis>
+            <data-series id="SeriesID" name="Behandlungen" data="[[chartdata]]">
+            </data-series>
+        </vaadin-line-chart>
+    </template>
+    <script>
+    Polymer({
+        is: 'chart-behandlungsdichte',
+
+        properties: {
+            chartdata: {
+                type: Array
+            }
+        },
+
+        observers: [
+            'updateData(chartdata)'
+        ],
+
+        updateData: function(chartdata) {
+            console.log('(updateData) chart-behandlungsdichte', chartdata);
+
+            //var chartWC = this.$.chart;
+            //
+            //
+            //if (chartWC) {
+            //    var chart = chartWC.chart;
+            //    if (chart && chart.series) {
+            //
+            //        chart.series[1] = {};
+            //        var data = chartdata[0].data;
+            //
+            //        console.log('(updateData) async', data, chart, chart.getConfiguration());
+            //
+            //        //chart.series[1].setData(data);
+            //    }
+            //};
+
+        }
+
+
+
+    });
+    </script>
+</dom-module>
